@@ -5,6 +5,10 @@
 using namespace std;
 
 class ExpensesXmlFile{
+    const string EXPENSES_FILE_NAME;
+
+public:
+    ExpensesXmlFile(string expensesFilename) : EXPENSES_FILE_NAME(expensesFilename){};
 
 };
 #endif
