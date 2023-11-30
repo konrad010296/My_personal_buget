@@ -1,0 +1,6 @@
+bin
+obj 
+myPersonalBuget.*
+incomesFile.xml
+expensesFile.xml
+usersFile.xml
