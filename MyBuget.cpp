@@ -45,3 +45,6 @@ cout << "7 - Log out" << endl;
 
     return choise;
 }
+void MyBuget::addIncome(){
+bugetMeneger->addIncome();
+}

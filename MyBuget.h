@@ -30,6 +30,7 @@ public:
     char userPanel();
     void logIn();
     int getLoggedUserId();
+    void addIncome();
 
 
 

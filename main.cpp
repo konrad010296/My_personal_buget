@@ -31,7 +31,7 @@ int main() {
 
         switch(choise) {
         case '1' : {
-
+          myBuget.addIncome();
         }
         break;
         case '2' : {

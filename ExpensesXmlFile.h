@@ -9,6 +9,8 @@ class ExpensesXmlFile{
 
 public:
     ExpensesXmlFile(string expensesFilename) : EXPENSES_FILE_NAME(expensesFilename){};
+ //   void addExpenseToFile(idOfLoggedUser);
+    void readExpensesFromFile();
 
 };
 #endif
