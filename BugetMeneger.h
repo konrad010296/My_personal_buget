@@ -12,26 +12,28 @@
 
 using namespace std;
 
-class BugetMeneger{
+class BugetMeneger
+{
 
-IncomesXmlFile incomeXmlFile;
-ExpensesXmlFile expenseXmlFile;
-vector <Income> incomes;
-vector <Expense> expenses;
-int idLoggedUser;
+    IncomesXmlFile incomeXmlFile;
+    ExpensesXmlFile expenseXmlFile;
+    vector <Income> incomes;
+    vector <Expense> expenses;
+    int idLoggedUser;
 
 
 public:
-    BugetMeneger(string incomesFileName,string expensesFileName, int loggedUser) : incomeXmlFile(incomesFileName), expenseXmlFile(expensesFileName), idLoggedUser(loggedUser){
-    incomes = incomeXmlFile.loadIncomesFromXmlFile(idLoggedUser);
+    BugetMeneger(string incomesFileName,string expensesFileName, int loggedUser) : incomeXmlFile(incomesFileName), expenseXmlFile(expensesFileName), idLoggedUser(loggedUser)
+    {
+        incomes = incomeXmlFile.loadIncomesFromXmlFile(idLoggedUser);
     };
-void addIncome();
-void addAnExpense();
-void balanceSheetForTheCurrentMonth();
-void balanceFromThePreviousMonth();
-void balanceSheetForTheSelectedPeriod();
-void changePassword();
-void logOut();
+    void addIncome();
+    void addAnExpense();
+    void balanceSheetForTheCurrentMonth();
+    void balanceFromThePreviousMonth();
+    void balanceSheetForTheSelectedPeriod();
+    void changePassword();
+    void logOut();
 
 
 

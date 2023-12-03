@@ -13,6 +13,7 @@ class HelperMethod
 public:
     static string getLine();
     static int convertionStringToInt(string digit);
-
+    static string getCurrentDate();
+    static string checkLengthString(string data);
 };
 #endif

@@ -1,6 +1,7 @@
 #include "IncomesXmlFile.h"
 
-void IncomesXmlFile::addIncomeToFile(Income incomes){
+void IncomesXmlFile::addIncomeToFile(Income incomes)
+{
 
     CMarkup xml;
 
@@ -53,11 +54,13 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.FindElem( "Amount" );
         income.setAmount(atoi(xml.GetData().c_str()));
 
-        if(income.getUserId() == idLoggedUser){
-        incomes.push_back(income);
+        if(income.getUserId() == idLoggedUser)
+        {
+            incomes.push_back(income);
         }
         xml.OutOfElem();
     }
     return incomes;
 
 }
+

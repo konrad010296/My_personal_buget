@@ -9,7 +9,8 @@
 
 using namespace std;
 
-class MyBuget {
+class MyBuget
+{
 
     UserMeneger userMeneger;
     BugetMeneger *bugetMeneger;
@@ -19,11 +20,14 @@ class MyBuget {
 
 
 public:
-    MyBuget(string usersFileName, string incomesFileName, string expensesFileName) : userMeneger(usersFileName), INCOMES_FILE_NAME(incomesFileName), EXPENSES_FILE_NAME(expensesFileName) {
-        bugetMeneger = NULL;};
-    ~MyBuget(){
-    delete bugetMeneger;
-    bugetMeneger = NULL;
+    MyBuget(string usersFileName, string incomesFileName, string expensesFileName) : userMeneger(usersFileName), INCOMES_FILE_NAME(incomesFileName), EXPENSES_FILE_NAME(expensesFileName)
+    {
+        bugetMeneger = NULL;
+    };
+    ~MyBuget()
+    {
+        delete bugetMeneger;
+        bugetMeneger = NULL;
     }
     char logInPanel();
     void registerUser();

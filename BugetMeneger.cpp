@@ -2,15 +2,17 @@
 
 void BugetMeneger::addIncome()
 {
+    string date = "";
     system("CLS");
     Income income;
 
-    cout << "Ustaw Id Zamowienia : " << endl;
-    income.setIncomeId(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
-    cout << "Ustaw Id Zalgoowanego : " << endl;
+    if(incomes.size() == 0)
+        income.setIncomeId(1);
+    else
+    income.setIncomeId(incomes[incomes.size() - 1].getIncomeId() + 1);
     income.setUserId(idLoggedUser);
-    cout << "Ustaw Date : " << endl;
-    income.setDate(HelperMethod::getLine());
+    cout << "Set date in format rrrr-dd-mm : " << endl;
+    income.setDate(HelperMethod::getCurrentDate());
     cout << "Nazwa itemu : " << endl;
     income.setItemName(HelperMethod::getLine());
     cout << "Iloœæ : " << endl;

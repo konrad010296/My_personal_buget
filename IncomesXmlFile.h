@@ -7,12 +7,16 @@
 
 using namespace std;
 
-class IncomesXmlFile{
+class IncomesXmlFile
+{
     const string INCOMES_FILE_NAME;
     int lastIncomeId;
 
 public:
-    IncomesXmlFile(string incomesFileName) : INCOMES_FILE_NAME(incomesFileName){};
+    IncomesXmlFile(string incomesFileName) : INCOMES_FILE_NAME(incomesFileName)
+    {
+        lastIncomeId = 0;
+    };
     vector <Income> loadIncomesFromXmlFile(int idLoggedUser);
     void addIncomeToFile(Income incomes);
 };
