@@ -41,3 +41,47 @@ string HelperMethod::getCurrentDate(){
     currentData = year + "-" + month + "-" + day;
     return currentData;
 }
+
+bool HelperMethod::askAboutDate()
+    {
+        char choise;
+
+        while((choise != 'y') || (choise != 'o')){
+        cout << "Do I want to set today's date? If so click 'y' " << endl;
+        cout << "Do I want to set other date? If so click 'o' " << endl;
+        choise = getch();
+
+        switch(choise)
+        {
+        case 'y':
+        {
+        system("CLS");
+        return true;
+        }
+        break;
+        case 'o':
+        {
+         system("CLS");
+         return false;
+        }
+        break;
+        }
+        cout << "Correct choise !!" << endl;
+        Sleep(2000);
+        system("CLS");
+    }
+    }
+bool HelperMethod::checkDateFormat(string date)
+{
+        if((date[4] == '-') && (date[7] == '-'))
+        {
+            return true;
+        }
+        else
+        {
+            cout << "You entered the wrong date format!!!" << endl;
+            Sleep(2000);
+            system("CLS");
+            return false;
+        }
+    }

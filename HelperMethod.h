@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <windows.h>
 #include <sstream>
 #include <conio.h>
 using namespace std;
@@ -15,5 +16,7 @@ public:
     static int convertionStringToInt(string digit);
     static string getCurrentDate();
     static string checkLengthString(string data);
+    static bool askAboutDate();
+    static bool checkDateFormat(string date);
 };
 #endif
