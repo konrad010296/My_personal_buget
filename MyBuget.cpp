@@ -54,3 +54,8 @@ void MyBuget::addIncome()
 {
     bugetMeneger->addIncome();
 }
+
+void MyBuget::addAnExpense()
+{
+    bugetMeneger->addAnExpense();
+}

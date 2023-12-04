@@ -35,6 +35,7 @@ public:
     void logIn();
     int getLoggedUserId();
     void addIncome();
+    void addAnExpense();
 
 
 

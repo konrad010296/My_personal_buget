@@ -26,6 +26,7 @@ public:
     BugetMeneger(string incomesFileName,string expensesFileName, int loggedUser) : incomeXmlFile(incomesFileName), expenseXmlFile(expensesFileName), idLoggedUser(loggedUser)
     {
         incomes = incomeXmlFile.loadIncomesFromXmlFile(idLoggedUser);
+        expenses = expenseXmlFile.readExpensesFromFile(idLoggedUser);
     };
     void addIncome();
     void addAnExpense();

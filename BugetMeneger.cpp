@@ -36,4 +36,39 @@ void BugetMeneger::addIncome()
     incomeXmlFile.addIncomeToFile(income, date);
 }
 
+void BugetMeneger::addAnExpense(){
+    string date = "";
+    system("CLS");
+    Expense expense;
+    bool goodDate = false;
+
+    if(expenses.size() == 0)
+        expense.setExpenseId(1);
+    else
+        expense.setExpenseId(incomes[expenses.size() - 1].getIncomeId() + 1);
+    expense.setUserId(idLoggedUser);
+    if(HelperMethod::askAboutDate())
+    {
+        date = HelperMethod::getCurrentDate();
+        expense.setDate(HelperMethod::convetionDateToInt(date));
+    }
+    else
+    {
+        while(!goodDate)
+        {
+            cout << "Set date in format rrrr-mm-dd : " << endl;
+            date = HelperMethod::getLine();
+            goodDate = HelperMethod::checkDateFormat(date);
+            expense.setDate(HelperMethod::convetionDateToInt(date));
+        }
+    }
+    cout << "Item name : " << endl;
+    expense.setItemName(HelperMethod::getLine());
+    cout << "Amount : " << endl;
+    expense.setAmount(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
+
+    expenses.push_back(expense);
+    expenseXmlFile.addExpenseToFile(expense, date);
+
+}
 

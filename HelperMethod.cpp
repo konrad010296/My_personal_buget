@@ -92,7 +92,7 @@ bool HelperMethod::checkDateFormat(string date)
     }
     else
     {
-        cout << "You entered the wrong date format!!!" << endl;
+        cout << "You entered the wrong date format or date is not digit !!" << endl;
         Sleep(2000);
         system("CLS");
         return false;

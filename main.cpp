@@ -45,7 +45,7 @@ int main()
         break;
         case '2' :
         {
-
+            myBuget.addAnExpense();
         }
         break;
         case '3' :
