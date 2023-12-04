@@ -15,12 +15,18 @@ class UserMeneger
     UserXmlFile userXmlFile;
     vector <User> users;
     int idOfLoggedUser;
+    int lastUserId;
 
 public:
     UserMeneger(string usersFileName) : userXmlFile(usersFileName)
     {
         users = userXmlFile.loadUsersFromXmlFile();
         idOfLoggedUser = 0;
+        lastUserId = 0;
+        if(users.size() == 0)
+            lastUserId = 0;
+        else
+            lastUserId = users[users.size() - 1].getUserId();
     }
     void registerUser();
     void logIn();

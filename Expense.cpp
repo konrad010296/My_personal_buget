@@ -6,7 +6,7 @@ expenseId = id;
 void Expense::setUserId(int idUser){
 userId = idUser;
 }
-void Expense::setDate(string datee){
+void Expense::setDate(int datee){
 date = datee;
 }
 void Expense::setItemName(string itemName){
@@ -22,7 +22,7 @@ return expenseId;
 int Expense::getUserId(){
 return userId;
 }
-string Expense::getDate(){
+int Expense::getDate(){
 return date;
 }
 string Expense::getItemName(){

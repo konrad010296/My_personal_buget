@@ -12,8 +12,8 @@ void UserMeneger::registerUser() {
     user.setUserLogin(HelperMethod::getLine());
     cout << "Enter Password : " << endl;
     user.setUserPassword(HelperMethod::getLine());
-
-    user.setUserId(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
+    lastUserId += 1;
+    user.setUserId(lastUserId);
     users.push_back(user);
     userXmlFile.addUserToXmlFile(user);
 }
