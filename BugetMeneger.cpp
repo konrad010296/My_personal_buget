@@ -27,8 +27,8 @@ void BugetMeneger::addIncome()
 
             goodFormatDate = HelperMethod::checkDateFormat(date);
             if(goodFormatDate)
-            goodDateRage = HelperMethod::checkDateRage(date);
-       }
+                goodDateRage = HelperMethod::checkDateRage(date);
+        }
     }
     income.setDate(HelperMethod::convetionDateToInt(date));
     cout << "Item name : " << endl;
@@ -40,7 +40,8 @@ void BugetMeneger::addIncome()
     incomeXmlFile.addIncomeToFile(income, date);
 }
 
-void BugetMeneger::addAnExpense(){
+void BugetMeneger::addAnExpense()
+{
     string date = "";
     system("CLS");
     Expense expense;

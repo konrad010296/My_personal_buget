@@ -1,7 +1,6 @@
 #include "UserMeneger.h"
 
-void UserMeneger::registerUser()
-{
+void UserMeneger::registerUser() {
     system("CLS");
     User user;
 
@@ -13,14 +12,13 @@ void UserMeneger::registerUser()
     user.setUserLogin(HelperMethod::getLine());
     cout << "Enter Password : " << endl;
     user.setUserPassword(HelperMethod::getLine());
-
-    user.setUserId(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
+    lastUserId += 1;
+    user.setUserId(lastUserId);
     users.push_back(user);
     userXmlFile.addUserToXmlFile(user);
 }
 
-void UserMeneger::logIn()
-{
+void UserMeneger::logIn() {
     vector <User> :: iterator it;
     string login,password;
     bool logged = false;
@@ -30,19 +28,14 @@ void UserMeneger::logIn()
     cout << "Enter the password : " << endl;
     password = HelperMethod::getLine();
 
-    for(it = users.begin() ; it != users.end() ; ++it)
-    {
-        if((login == (*it).getUserLogin()) && password == (*it).getUserPassword())
-        {
+    for(it = users.begin() ; it != users.end() ; ++it) {
+        if((login == (*it).getUserLogin()) && password == (*it).getUserPassword()) {
             idOfLoggedUser = (*it).getUserId();
             logged = true;
-        }
-        else
-        {
+        } else {
             logged = false;
         }
-        if(logged)
-        {
+        if(logged) {
             cout << "You have logged in successfully!" << endl;
             Sleep(2000);
             return;
@@ -53,7 +46,6 @@ void UserMeneger::logIn()
     return;
 }
 
-int UserMeneger::getLoggedUserId()
-{
+int UserMeneger::getLoggedUserId() {
     return idOfLoggedUser;
 }

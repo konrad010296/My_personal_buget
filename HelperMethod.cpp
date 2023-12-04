@@ -187,27 +187,32 @@ bool HelperMethod::checkDateRage(string date)
     {
         cout << "Podany miesiac nie istnieje, wybierz zakres miesiecy miedzy 1 - 12 : " << endl;
         Sleep(2000);
+            system("CLS");
         return false;
     }
     else if((yearDigit < initialYear) || (monthDigit < initialMonth) || (dayDigit < initialDay))
     {
         cout << "Podana data jest zbyt stara ! Najstarsza date ktora mozna wprowadzic to : 2000-01-01" << endl;
         Sleep(2000);
+            system("CLS");
         return false;
     }
     else if(yearDigit > currentYear)
     {
         cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
+            system("CLS");
         return false;
     }
     else if((yearDigit == currentYear) && (monthDigit > currentMonth))
     {
         cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
+            system("CLS");
     }
     else
     {
+            system("CLS");
         return true;
     }
 }
