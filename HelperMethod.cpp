@@ -178,35 +178,35 @@ bool HelperMethod::checkDateRage(string date)
 
     if(dayDigit > daysInMonth)
     {
-        cout << "Podana iloœæ dni w danym miesi¹cu jest zbyt du¿a ! Maksymalna iloœæ dni w danym miesi¹cu wynosi : " << daysInMonth << endl;
+        cout << "The given number of days in a given month is too large! The maximum number of days in a given month is : " << daysInMonth << endl;
         Sleep(2000);
         return false;
 
     }
     else if(monthDigit > 12)
     {
-        cout << "Podany miesiac nie istnieje, wybierz zakres miesiecy miedzy 1 - 12 : " << endl;
+        cout << "The given month does not exist, please select a month range between 1 - 12 : " << endl;
         Sleep(2000);
             system("CLS");
         return false;
     }
     else if((yearDigit < initialYear) || (monthDigit < initialMonth) || (dayDigit < initialDay))
     {
-        cout << "Podana data jest zbyt stara ! Najstarsza date ktora mozna wprowadzic to : 2000-01-01" << endl;
+        cout << "The given date is too old! The oldest date that can be entered is : 2000-01-01" << endl;
         Sleep(2000);
             system("CLS");
         return false;
     }
     else if(yearDigit > currentYear)
     {
-        cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
+        cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
             system("CLS");
         return false;
     }
     else if((yearDigit == currentYear) && (monthDigit > currentMonth))
     {
-        cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
+        cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
             system("CLS");
     }
