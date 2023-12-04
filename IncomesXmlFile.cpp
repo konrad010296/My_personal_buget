@@ -1,6 +1,6 @@
 #include "IncomesXmlFile.h"
 
-void IncomesXmlFile::addIncomeToFile(Income incomes)
+void IncomesXmlFile::addIncomeToFile(Income incomes, string date)
 {
 
     CMarkup xml;
@@ -18,7 +18,7 @@ void IncomesXmlFile::addIncomeToFile(Income incomes)
     xml.IntoElem();
     xml.AddElem( "IncomeId", incomes.getIncomeId());
     xml.AddElem( "UserId", incomes.getUserId());
-    xml.AddElem( "Date", incomes.getDate());
+    xml.AddElem( "Date", date);
     xml.AddElem( "ItemName", incomes.getItemName());
     xml.AddElem( "Amount", incomes.getAmount());
 
@@ -48,7 +48,7 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.FindElem( "UserId" );
         income.setUserId(atoi(xml.GetData().c_str()));
         xml.FindElem( "Date" );
-        income.setDate(xml.GetData());
+        income.setDate(HelperMethod::convetionDateToInt(xml.GetData()));
         xml.FindElem( "ItemName" );
         income.setItemName(xml.GetData());
         xml.FindElem( "Amount" );

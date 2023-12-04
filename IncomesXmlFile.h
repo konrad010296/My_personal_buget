@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Markup.h"
+#include "HelperMethod.h"
 
 using namespace std;
 
@@ -18,6 +19,6 @@ public:
         lastIncomeId = 0;
     };
     vector <Income> loadIncomesFromXmlFile(int idLoggedUser);
-    void addIncomeToFile(Income incomes);
+    void addIncomeToFile(Income incomes, string date);
 };
 #endif
