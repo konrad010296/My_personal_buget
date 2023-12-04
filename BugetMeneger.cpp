@@ -5,7 +5,8 @@ void BugetMeneger::addIncome()
     string date = "";
     system("CLS");
     Income income;
-    bool goodDate = false;
+    bool goodFormatDate = false;
+    bool goodDateRage = false;
 
     if(incomes.size() == 0)
         income.setIncomeId(1);
@@ -19,14 +20,17 @@ void BugetMeneger::addIncome()
     }
     else
     {
-        while(!goodDate)
+        while(!goodDateRage)
         {
             cout << "Set date in format rrrr-mm-dd : " << endl;
             date = HelperMethod::getLine();
-            goodDate = HelperMethod::checkDateFormat(date);
-            income.setDate(HelperMethod::convetionDateToInt(date));
-        }
+
+            goodFormatDate = HelperMethod::checkDateFormat(date);
+            if(goodFormatDate)
+            goodDateRage = HelperMethod::checkDateRage(date);
+       }
     }
+    income.setDate(HelperMethod::convetionDateToInt(date));
     cout << "Item name : " << endl;
     income.setItemName(HelperMethod::getLine());
     cout << "Amount : " << endl;

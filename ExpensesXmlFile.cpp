@@ -2,7 +2,7 @@
 
 void ExpensesXmlFile::addExpenseToFile(Expense expense, string date)
 {
-CMarkup xml;
+    CMarkup xml;
 
     bool bSuccess = xml.Load (EXPENSES_FILE_NAME);
 

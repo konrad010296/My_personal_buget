@@ -116,3 +116,98 @@ int HelperMethod::convetionDateToInt(string date)
     return dateToInt;
 }
 
+int HelperMethod::calculateDaysInMonth(int yearDigit,int monthDigit)
+{
+    int daysInMonth = 0;
+    if (monthDigit == 2)
+    {
+        if ((yearDigit % 400 == 0) || (yearDigit % 4 == 0 && yearDigit % 100 != 0))
+            daysInMonth = 29;
+        else
+            daysInMonth = 28;
+    }
+
+    else if (monthDigit == 1 || monthDigit == 3 || monthDigit == 5 || monthDigit == 7 || monthDigit == 8
+             || monthDigit == 10 || monthDigit == 12)
+        daysInMonth = 31;
+    else
+        daysInMonth = 30;
+
+    return daysInMonth;
+}
+
+bool HelperMethod::checkDateRage(string date)
+{
+
+    const int initialYear = 2000;
+    const int initialMonth = 1;
+    const int initialDay = 1;
+    string year = "";
+    string month = "";
+    string day = "";
+    string currentDate = "";
+    string currentDateYear = "";
+    string currentDateMonth = "";
+    string currentDateDay = "";
+    int currentYear= 0;
+    int currentMonth = 0;
+    int currentDaysInMonth = 0;
+    int daysInMonth = 0;
+    int yearDigit = 0;
+    int monthDigit = 0;
+    int dayDigit = 0;
+
+    currentDate = getCurrentDate();
+
+    year = year + date[0] + date[1] + date[2] + date[3];
+    month = month + date[5] + date[6];
+    day = day + date[8] + date[9];
+
+    currentDateYear = currentDateYear + currentDate[0] + currentDate[1] + currentDate[2] + currentDate[3];
+    currentDateMonth = currentDateMonth + currentDate[5] + currentDate[6];
+
+    yearDigit = convertionStringToInt(year);
+    monthDigit = convertionStringToInt(month);
+    dayDigit = convertionStringToInt(day);
+
+    currentYear = convertionStringToInt(currentDateYear);
+    currentMonth = convertionStringToInt(currentDateMonth);
+    currentDaysInMonth = calculateDaysInMonth(currentYear,currentMonth);
+
+    daysInMonth = calculateDaysInMonth(yearDigit,monthDigit);
+
+    if(dayDigit > daysInMonth)
+    {
+        cout << "Podana iloœæ dni w danym miesi¹cu jest zbyt du¿a ! Maksymalna iloœæ dni w danym miesi¹cu wynosi : " << daysInMonth << endl;
+        Sleep(2000);
+        return false;
+
+    }
+    else if(monthDigit > 12)
+    {
+        cout << "Podany miesiac nie istnieje, wybierz zakres miesiecy miedzy 1 - 12 : " << endl;
+        Sleep(2000);
+        return false;
+    }
+    else if((yearDigit < initialYear) || (monthDigit < initialMonth) || (dayDigit < initialDay))
+    {
+        cout << "Podana data jest zbyt stara ! Najstarsza date ktora mozna wprowadzic to : 2000-01-01" << endl;
+        Sleep(2000);
+        return false;
+    }
+    else if(yearDigit > currentYear)
+    {
+        cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
+        Sleep(2000);
+        return false;
+    }
+    else if((yearDigit == currentYear) && (monthDigit > currentMonth))
+    {
+        cout << "Podana data jest zbyt odlegla, najstarsza date ktora mozesz uzyc to : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
+        Sleep(2000);
+    }
+    else
+    {
+        return true;
+    }
+}

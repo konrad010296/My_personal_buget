@@ -21,5 +21,7 @@ public:
     static bool askAboutDate();
     static bool checkDateFormat(string date);
     static int convetionDateToInt(string date);
+    static bool checkDateRage(string date);
+    static int calculateDaysInMonth(int yearDigit,int monthDigit);
 };
 #endif
