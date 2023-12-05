@@ -5,9 +5,9 @@ void UserMeneger::registerUser() {
     User user;
 
     cout << "Enter Name : " << endl;
-    user.setUserName(HelperMethod::getLine());
+    user.setUserName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Enter Surname : " << endl;
-    user.setUserSurname(HelperMethod::getLine());
+    user.setUserSurname(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Enter Login : " << endl;
     user.setUserLogin(HelperMethod::getLine());
     cout << "Enter Password : " << endl;

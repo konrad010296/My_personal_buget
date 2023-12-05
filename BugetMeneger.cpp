@@ -3,6 +3,7 @@
 void BugetMeneger::addIncome()
 {
     string date = "";
+    string amount = "";
     system("CLS");
     Income income;
     bool goodFormatDate = false;
@@ -32,21 +33,25 @@ void BugetMeneger::addIncome()
     }
     income.setDate(HelperMethod::convetionDateToInt(date));
     cout << "Item name : " << endl;
-    income.setItemName(HelperMethod::getLine());
+    income.setItemName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Amount : " << endl;
-    income.setAmount(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
+    amount = HelperMethod::getLine();
+    amount = HelperMethod::replaceTheCommaWithDot(amount);
+    income.setAmount(HelperMethod::convertionStringToFloat(amount));
 
     incomes.push_back(income);
-    incomeXmlFile.addIncomeToFile(income, date);
+    incomeXmlFile.addIncomeToFile(income, date, amount);
 }
 
 void BugetMeneger::addAnExpense()
 {
     string date = "";
+    string amount = "";
     system("CLS");
     Expense expense;
-     bool goodFormatDate = false;
+    bool goodFormatDate = false;
     bool goodDateRage = false;
+
 
     if(expenses.size() == 0)
         expense.setExpenseId(1);
@@ -71,12 +76,14 @@ void BugetMeneger::addAnExpense()
     }
     expense.setDate(HelperMethod::convetionDateToInt(date));
     cout << "Item name : " << endl;
-    expense.setItemName(HelperMethod::getLine());
+    expense.setItemName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Amount : " << endl;
-    expense.setAmount(HelperMethod::convertionStringToInt(HelperMethod::getLine()));
+    amount = HelperMethod::getLine();
+    amount = HelperMethod::replaceTheCommaWithDot(amount);
+    expense.setAmount(HelperMethod::convertionStringToFloat(amount));
 
     expenses.push_back(expense);
-    expenseXmlFile.addExpenseToFile(expense, date);
+    expenseXmlFile.addExpenseToFile(expense, date, amount);
 
 }
 

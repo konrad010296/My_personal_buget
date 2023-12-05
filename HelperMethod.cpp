@@ -39,6 +39,12 @@ int HelperMethod::convertionStringToInt(string digit)
     return toInt;
 }
 
+float HelperMethod::convertionStringToFloat(string digit){
+float num_float = stof(digit);
+
+return num_float;
+}
+
 string HelperMethod::getCurrentDate()
 {
 
@@ -180,6 +186,7 @@ bool HelperMethod::checkDateRage(string date)
     {
         cout << "The given number of days in a given month is too large! The maximum number of days in a given month is : " << daysInMonth << endl;
         Sleep(2000);
+        system("CLS");
         return false;
 
     }
@@ -215,4 +222,18 @@ bool HelperMethod::checkDateRage(string date)
             system("CLS");
         return true;
     }
+}
+
+string HelperMethod::replaceWithCapitalLetter(string word){
+
+    word[0] = toupper(word[0]);
+    return word;
+}
+
+string HelperMethod::replaceTheCommaWithDot(string word){
+
+    while (word.find(",") != string::npos)
+        word.replace(word.find(","), 1, ".");
+
+    return word;
 }

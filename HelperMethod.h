@@ -16,6 +16,7 @@ public:
     static string getLine();
     static int getDigit();
     static int convertionStringToInt(string digit);
+    static float convertionStringToFloat(string digit);
     static string getCurrentDate();
     static string checkLengthString(string data);
     static bool askAboutDate();
@@ -23,5 +24,7 @@ public:
     static int convetionDateToInt(string date);
     static bool checkDateRage(string date);
     static int calculateDaysInMonth(int yearDigit,int monthDigit);
+    static string replaceWithCapitalLetter(string word);
+    static string replaceTheCommaWithDot(string word);
 };
 #endif

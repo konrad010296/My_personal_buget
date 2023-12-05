@@ -1,6 +1,6 @@
 #include "IncomesXmlFile.h"
 
-void IncomesXmlFile::addIncomeToFile(Income incomes, string date)
+void IncomesXmlFile::addIncomeToFile(Income incomes, string date, string amount)
 {
 
     CMarkup xml;
@@ -20,7 +20,7 @@ void IncomesXmlFile::addIncomeToFile(Income incomes, string date)
     xml.AddElem( "UserId", incomes.getUserId());
     xml.AddElem( "Date", date);
     xml.AddElem( "ItemName", incomes.getItemName());
-    xml.AddElem( "Amount", incomes.getAmount());
+    xml.AddElem( "Amount", amount);
 
 
     xml.Save( INCOMES_FILE_NAME );

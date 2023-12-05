@@ -1,6 +1,6 @@
 #include "ExpensesXmlFile.h"
 
-void ExpensesXmlFile::addExpenseToFile(Expense expense, string date)
+void ExpensesXmlFile::addExpenseToFile(Expense expense, string date, string amount)
 {
     CMarkup xml;
 
@@ -19,7 +19,8 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense, string date)
     xml.AddElem( "UserId", expense.getUserId());
     xml.AddElem( "Date", date);
     xml.AddElem( "ItemName", expense.getItemName());
-    xml.AddElem( "Amount", expense.getAmount());
+    xml.AddElem( "Amount", amount);
+    system("PAUSE");
 
 
     xml.Save( EXPENSES_FILE_NAME );
