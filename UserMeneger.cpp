@@ -22,6 +22,7 @@ void UserMeneger::logIn() {
     vector <User> :: iterator it;
     string login,password;
     bool logged = false;
+    system("CLS");
 
     cout << "Enter the login : " << endl;
     login = HelperMethod::getLine();

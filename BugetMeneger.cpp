@@ -45,7 +45,8 @@ void BugetMeneger::addAnExpense()
     string date = "";
     system("CLS");
     Expense expense;
-    bool goodDate = false;
+     bool goodFormatDate = false;
+    bool goodDateRage = false;
 
     if(expenses.size() == 0)
         expense.setExpenseId(1);
@@ -59,14 +60,16 @@ void BugetMeneger::addAnExpense()
     }
     else
     {
-        while(!goodDate)
+        while(!goodDateRage)
         {
             cout << "Set date in format rrrr-mm-dd : " << endl;
             date = HelperMethod::getLine();
-            goodDate = HelperMethod::checkDateFormat(date);
-            expense.setDate(HelperMethod::convetionDateToInt(date));
+            goodFormatDate = HelperMethod::checkDateFormat(date);
+            if(goodFormatDate)
+                goodDateRage = HelperMethod::checkDateRage(date);
         }
     }
+    expense.setDate(HelperMethod::convetionDateToInt(date));
     cout << "Item name : " << endl;
     expense.setItemName(HelperMethod::getLine());
     cout << "Amount : " << endl;
