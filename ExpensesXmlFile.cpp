@@ -20,11 +20,7 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense, string date, string amou
     xml.AddElem( "Date", date);
     xml.AddElem( "ItemName", expense.getItemName());
     xml.AddElem( "Amount", amount);
-    system("PAUSE");
-
-
     xml.Save( EXPENSES_FILE_NAME );
-
 }
 
 vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)

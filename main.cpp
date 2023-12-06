@@ -55,12 +55,12 @@ int main()
         break;
         case '4' :
         {
-              myBuget.balanceFromThePreviousMonth();
+            myBuget.balanceFromThePreviousMonth();
         }
         break;
         case '5' :
         {
-
+            myBuget.balanceSheetForTheSelectedPeriod();
         }
         break;
         case '6' :

@@ -38,6 +38,7 @@ public:
     void addAnExpense();
     void balanceSheetForTheCurrentMonth();
     void balanceFromThePreviousMonth();
+    void balanceSheetForTheSelectedPeriod();
 
 
 
