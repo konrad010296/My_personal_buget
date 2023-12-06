@@ -19,6 +19,6 @@ public:
         lastIncomeId = 0;
     };
     vector <Income> loadIncomesFromXmlFile(int idLoggedUser);
-    void addIncomeToFile(Income incomes, string date);
+    void addIncomeToFile(Income incomes, string date, string amount);
 };
 #endif

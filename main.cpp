@@ -50,17 +50,17 @@ int main()
         break;
         case '3' :
         {
-
+            myBuget.balanceSheetForTheCurrentMonth();
         }
         break;
         case '4' :
         {
-
+            myBuget.balanceFromThePreviousMonth();
         }
         break;
         case '5' :
         {
-
+            myBuget.balanceSheetForTheSelectedPeriod();
         }
         break;
         case '6' :

@@ -1,6 +1,6 @@
 #include "ExpensesXmlFile.h"
 
-void ExpensesXmlFile::addExpenseToFile(Expense expense, string date)
+void ExpensesXmlFile::addExpenseToFile(Expense expense, string date, string amount)
 {
     CMarkup xml;
 
@@ -19,11 +19,8 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense, string date)
     xml.AddElem( "UserId", expense.getUserId());
     xml.AddElem( "Date", date);
     xml.AddElem( "ItemName", expense.getItemName());
-    xml.AddElem( "Amount", expense.getAmount());
-
-
+    xml.AddElem( "Amount", amount);
     xml.Save( EXPENSES_FILE_NAME );
-
 }
 
 vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
@@ -50,7 +47,7 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.FindElem( "ItemName" );
         expense.setItemName(xml.GetData());
         xml.FindElem( "Amount" );
-        expense.setAmount(atoi(xml.GetData().c_str()));
+        expense.setAmount(HelperMethod::convertionStringToFloat(xml.GetData()));
 
         if(expense.getUserId() == idLoggedUser)
         {

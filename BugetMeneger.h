@@ -9,6 +9,7 @@
 #include "conio.h"
 #include <windows.h>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,6 +21,8 @@ class BugetMeneger
     vector <Income> incomes;
     vector <Expense> expenses;
     int idLoggedUser;
+    float sumOfExpenses;
+    float sumOfIncomes;
 
 
 public:
@@ -27,6 +30,8 @@ public:
     {
         incomes = incomeXmlFile.loadIncomesFromXmlFile(idLoggedUser);
         expenses = expenseXmlFile.readExpensesFromFile(idLoggedUser);
+        sumOfExpenses = 0;
+        sumOfIncomes = 0;
     };
     void addIncome();
     void addAnExpense();

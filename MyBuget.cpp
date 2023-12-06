@@ -37,7 +37,7 @@ char MyBuget::userPanel()
 {
 
     system("CLS");
-    cout << "1 - Add revenue" << endl;
+    cout << "1 - Add income" << endl;
     cout << "2 - Add an expense" << endl;
     cout << "3 - Balance sheet for the current month" << endl;
     cout << "4 - Balance from the previous month" << endl;
@@ -58,4 +58,21 @@ void MyBuget::addIncome()
 void MyBuget::addAnExpense()
 {
     bugetMeneger->addAnExpense();
+}
+
+void MyBuget::balanceSheetForTheCurrentMonth()
+{
+    bugetMeneger->balanceSheetForTheCurrentMonth();
+}
+
+void MyBuget::balanceFromThePreviousMonth()
+{
+    bugetMeneger->balanceFromThePreviousMonth();
+}
+
+void MyBuget::balanceSheetForTheSelectedPeriod()
+{
+    {
+        bugetMeneger->balanceSheetForTheSelectedPeriod();
+    }
 }
