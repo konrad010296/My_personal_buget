@@ -33,7 +33,9 @@ public:
     void registerUser();
     char userPanel();
     void logIn();
+    void logOut();
     int getLoggedUserId();
+    int setLogoutUserId();
     void addIncome();
     void addAnExpense();
     void balanceSheetForTheCurrentMonth();

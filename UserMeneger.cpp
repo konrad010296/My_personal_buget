@@ -58,3 +58,6 @@ int UserMeneger::getLoggedUserId()
 {
     return idOfLoggedUser;
 }
+int UserMeneger::setLogoutUserId(){
+    idOfLoggedUser = 0;
+}

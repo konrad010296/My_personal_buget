@@ -76,3 +76,9 @@ void MyBuget::balanceSheetForTheSelectedPeriod()
         bugetMeneger->balanceSheetForTheSelectedPeriod();
     }
 }
+void MyBuget::logOut(){
+        bugetMeneger->logOut();
+        delete bugetMeneger;
+        bugetMeneger = NULL;
+        userMeneger.setLogoutUserId();
+}

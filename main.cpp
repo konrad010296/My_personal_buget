@@ -7,6 +7,7 @@ using namespace std;
 int main()
 {
     MyBuget myBuget("UsersFile.xml", "incomes.xml","expenses.xml");
+    while(true){
     while(myBuget.getLoggedUserId()  == 0)
     {
         system("CLS");
@@ -70,10 +71,11 @@ int main()
         break;
         case '7' :
         {
-            exit(0);
+            myBuget.logOut();
         }
         break;
         }
+    }
     }
     return 0;
 }

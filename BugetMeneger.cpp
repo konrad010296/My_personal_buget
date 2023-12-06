@@ -356,3 +356,10 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
         system("PAUSE");
     }
 }
+
+void BugetMeneger::logOut(){
+    system("CLS");
+    cout << "Thank you for using the My Budget App. See you !" << endl;
+    Sleep(2000);
+idLoggedUser = 0;
+}
