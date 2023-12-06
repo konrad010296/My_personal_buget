@@ -59,3 +59,13 @@ void MyBuget::addAnExpense()
 {
     bugetMeneger->addAnExpense();
 }
+
+void MyBuget::balanceSheetForTheCurrentMonth()
+{
+    bugetMeneger->balanceSheetForTheCurrentMonth();
+}
+
+void MyBuget::balanceFromThePreviousMonth()
+{
+    bugetMeneger->balanceFromThePreviousMonth();
+}

@@ -26,5 +26,8 @@ public:
     static int calculateDaysInMonth(int yearDigit,int monthDigit);
     static string replaceWithCapitalLetter(string word);
     static string replaceTheCommaWithDot(string word);
+    static string changeDateToBeginningMonth(string word);
+    static string connectLastDayWitchCurrentMounth(string date, int day);
+    static string dateSeparatedByDashes(int date);
 };
 #endif

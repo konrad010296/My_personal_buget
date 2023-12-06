@@ -39,10 +39,11 @@ int HelperMethod::convertionStringToInt(string digit)
     return toInt;
 }
 
-float HelperMethod::convertionStringToFloat(string digit){
-float num_float = stof(digit);
+float HelperMethod::convertionStringToFloat(string digit)
+{
+    float num_float = stof(digit);
 
-return num_float;
+    return num_float;
 }
 
 string HelperMethod::getCurrentDate()
@@ -107,14 +108,14 @@ bool HelperMethod::checkDateFormat(string date)
 int HelperMethod::convetionDateToInt(string date)
 {
     string year = "";
-    string mounth = "";
+    string month = "";
     string day = "";
     string fullDate = "";
     int dateToInt;
-    year = year + date[0] + date[1] + date[2] + date[3];
-    mounth = mounth + date[5] + date[6];
-    day = day + date[8] + date[9];
-    fullDate = fullDate + year + mounth + day ;
+    year = date.substr(0, 4);
+    month = date.substr(5, 2);
+    day = date.substr(8, 2);
+    fullDate = fullDate + year + month + day ;
 
     istringstream iss(fullDate);
     iss >> dateToInt;
@@ -148,9 +149,9 @@ bool HelperMethod::checkDateRage(string date)
     const int initialYear = 2000;
     const int initialMonth = 1;
     const int initialDay = 1;
-    string year = "";
-    string month = "";
-    string day = "";
+    string inputYear = "";
+    string inputMonth = "";
+    string inputDay = "";
     string currentDate = "";
     string currentDateYear = "";
     string currentDateMonth = "";
@@ -165,16 +166,16 @@ bool HelperMethod::checkDateRage(string date)
 
     currentDate = getCurrentDate();
 
-    year = year + date[0] + date[1] + date[2] + date[3];
-    month = month + date[5] + date[6];
-    day = day + date[8] + date[9];
+    inputYear = date.substr(0, 4);
+    inputMonth = date.substr(5, 2);
+    inputDay = date.substr(8, 2);
 
-    currentDateYear = currentDateYear + currentDate[0] + currentDate[1] + currentDate[2] + currentDate[3];
-    currentDateMonth = currentDateMonth + currentDate[5] + currentDate[6];
+    currentDateYear = currentDate.substr(0, 4);
+    currentDateMonth = currentDate.substr(5, 2);
 
-    yearDigit = convertionStringToInt(year);
-    monthDigit = convertionStringToInt(month);
-    dayDigit = convertionStringToInt(day);
+    yearDigit = convertionStringToInt(inputYear);
+    monthDigit = convertionStringToInt(inputMonth);
+    dayDigit = convertionStringToInt(inputDay);
 
     currentYear = convertionStringToInt(currentDateYear);
     currentMonth = convertionStringToInt(currentDateMonth);
@@ -194,46 +195,96 @@ bool HelperMethod::checkDateRage(string date)
     {
         cout << "The given month does not exist, please select a month range between 1 - 12 : " << endl;
         Sleep(2000);
-            system("CLS");
+        system("CLS");
         return false;
     }
     else if((yearDigit < initialYear) || (monthDigit < initialMonth) || (dayDigit < initialDay))
     {
         cout << "The given date is too old! The oldest date that can be entered is : 2000-01-01" << endl;
         Sleep(2000);
-            system("CLS");
+        system("CLS");
+        return false;
+    }
+    else if(dayDigit > daysInMonth)
+    {
+        cout << "The given day does not exist! Last day of this month = " << daysInMonth << endl;
+        Sleep(2000);
+        system("CLS");
         return false;
     }
     else if(yearDigit > currentYear)
     {
         cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
-            system("CLS");
+        system("CLS");
         return false;
     }
     else if((yearDigit == currentYear) && (monthDigit > currentMonth))
     {
         cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
-            system("CLS");
+        system("CLS");
     }
-    else
-    {
-            system("CLS");
-        return true;
-    }
+
+    system("CLS");
+    return true;
 }
 
-string HelperMethod::replaceWithCapitalLetter(string word){
+string HelperMethod::replaceWithCapitalLetter(string word)
+{
 
     word[0] = toupper(word[0]);
     return word;
 }
 
-string HelperMethod::replaceTheCommaWithDot(string word){
+string HelperMethod::replaceTheCommaWithDot(string word)
+{
 
     while (word.find(",") != string::npos)
         word.replace(word.find(","), 1, ".");
 
     return word;
+}
+
+string HelperMethod::changeDateToBeginningMonth(string word)
+{
+
+    string begginingMonth = "";
+    string initialDay = "01";
+
+    for(size_t i = 0 ; i < word.length() - 2 ; i++)
+    {
+
+        begginingMonth += word[i];
+    }
+    begginingMonth += initialDay;
+    return begginingMonth;
+}
+
+string HelperMethod::connectLastDayWitchCurrentMounth(string date, int day)
+{
+
+    string convertedDay = to_string(day);
+    string endOfMounth = "";
+
+    for(int i = 0 ; i < 8 ; i++)
+    {
+
+        endOfMounth += date[i];
+    }
+    endOfMounth += convertedDay;
+
+    return endOfMounth;
+
+}
+
+string HelperMethod::dateSeparatedByDashes(int date)
+{
+
+    string newDate = to_string(date);
+    string year = newDate.substr(0, 4);
+    string month = newDate.substr(4, 2);
+    string day = newDate.substr(6, 2);
+
+    return year + "-" + month + "-" + day;
 }

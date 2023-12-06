@@ -36,6 +36,8 @@ public:
     int getLoggedUserId();
     void addIncome();
     void addAnExpense();
+    void balanceSheetForTheCurrentMonth();
+    void balanceFromThePreviousMonth();
 
 
 

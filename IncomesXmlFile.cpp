@@ -52,7 +52,7 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.FindElem( "ItemName" );
         income.setItemName(xml.GetData());
         xml.FindElem( "Amount" );
-        income.setAmount(atoi(xml.GetData().c_str()));
+        income.setAmount(HelperMethod::convertionStringToFloat(xml.GetData()));
 
         if(income.getUserId() == idLoggedUser)
         {

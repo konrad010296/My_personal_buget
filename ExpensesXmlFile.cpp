@@ -51,7 +51,7 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.FindElem( "ItemName" );
         expense.setItemName(xml.GetData());
         xml.FindElem( "Amount" );
-        expense.setAmount(atoi(xml.GetData().c_str()));
+        expense.setAmount(HelperMethod::convertionStringToFloat(xml.GetData()));
 
         if(expense.getUserId() == idLoggedUser)
         {
