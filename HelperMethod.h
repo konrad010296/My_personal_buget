@@ -29,5 +29,6 @@ public:
     static string changeDateToBeginningMonth(string word);
     static string connectLastDayWitchCurrentMounth(string date, int day);
     static string dateSeparatedByDashes(int date);
+    static bool passwordLength(string password);
 };
 #endif

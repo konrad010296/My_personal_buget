@@ -2,17 +2,22 @@
 
 void UserMeneger::registerUser()
 {
+    bool passwordLength = false;
     system("CLS");
     User user;
 
-    cout << "Enter Name : " << endl;
-    user.setUserName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
-    cout << "Enter Surname : " << endl;
-    user.setUserSurname(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
-    cout << "Enter Login : " << endl;
-    user.setUserLogin(HelperMethod::getLine());
-    cout << "Enter Password : " << endl;
-    user.setUserPassword(HelperMethod::getLine());
+    while(!passwordLength)
+    {
+        cout << "Enter Name : " << endl;
+        user.setUserName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
+        cout << "Enter Surname : " << endl;
+        user.setUserSurname(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
+        cout << "Enter Login : " << endl;
+        user.setUserLogin(HelperMethod::getLine());
+        cout << "Enter Password : " << endl;
+        user.setUserPassword(HelperMethod::getLine());
+        passwordLength = HelperMethod::passwordLength(user.getUserPassword());
+    }
     lastUserId += 1;
     user.setUserId(lastUserId);
     users.push_back(user);
@@ -44,13 +49,17 @@ void UserMeneger::logIn()
         }
         if(logged)
         {
+            system("CLS");
             cout << "You have logged in successfully!" << endl;
             Sleep(2000);
+            system("CLS");
             return;
         }
     }
+    system("CLS");
     cout << "you have entered incorrect data" << endl;
     Sleep(2000);
+    system("CLS");
     return;
 }
 
@@ -61,7 +70,7 @@ void UserMeneger::changePassword(int loggedUserId)
     string repeatPassword = "";
     int trials = 0;
     bool correctData = false;
-
+    system("CLS");
     while(!correctData)
     {
         cout << "Enter new password : " << endl;
@@ -74,6 +83,7 @@ void UserMeneger::changePassword(int loggedUserId)
             cout << "The entered passwords are different !" << endl;
             Sleep(2000);
             trials++;
+            system("CLS");
         }
         if(trials == 3)
         {
@@ -92,9 +102,9 @@ void UserMeneger::changePassword(int loggedUserId)
 
         if(loggedUserId == (*it).getUserId())
             (*it).setUserPassword(newPassword);
-        cout << "The password has been changed successfully !" << endl;
-        Sleep(2000);
     }
+    cout << "The password has been changed successfully !" << endl;
+    Sleep(2000);
     userXmlFile.addUsersToFileAfterChangePassword(users);
 }
 
@@ -102,7 +112,7 @@ int UserMeneger::getLoggedUserId()
 {
     return idOfLoggedUser;
 }
-int UserMeneger::setLogoutUserId()
+void UserMeneger::setLogoutUserId()
 {
     idOfLoggedUser = 0;
 }

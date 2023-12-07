@@ -185,6 +185,7 @@ bool HelperMethod::checkDateRage(string date)
 
     if(dayDigit > daysInMonth)
     {
+        system("CLS");
         cout << "The given number of days in a given month is too large! The maximum number of days in a given month is : " << daysInMonth << endl;
         Sleep(2000);
         system("CLS");
@@ -193,6 +194,7 @@ bool HelperMethod::checkDateRage(string date)
     }
     else if(monthDigit > 12)
     {
+        system("CLS");
         cout << "The given month does not exist, please select a month range between 1 - 12 : " << endl;
         Sleep(2000);
         system("CLS");
@@ -200,6 +202,7 @@ bool HelperMethod::checkDateRage(string date)
     }
     else if((yearDigit < initialYear) || (monthDigit < initialMonth) || (dayDigit < initialDay))
     {
+        system("CLS");
         cout << "The given date is too old! The oldest date that can be entered is : 2000-01-01" << endl;
         Sleep(2000);
         system("CLS");
@@ -207,6 +210,7 @@ bool HelperMethod::checkDateRage(string date)
     }
     else if(dayDigit > daysInMonth)
     {
+        system("CLS");
         cout << "The given day does not exist! Last day of this month = " << daysInMonth << endl;
         Sleep(2000);
         system("CLS");
@@ -214,6 +218,7 @@ bool HelperMethod::checkDateRage(string date)
     }
     else if(yearDigit > currentYear)
     {
+        system("CLS");
         cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
         system("CLS");
@@ -221,6 +226,7 @@ bool HelperMethod::checkDateRage(string date)
     }
     else if((yearDigit == currentYear) && (monthDigit > currentMonth))
     {
+        system("CLS");
         cout << "The given date is too far away, the oldest date you can use is : " << currentYear << "-" << currentMonth << "-" << currentDaysInMonth << endl;
         Sleep(2000);
         system("CLS");
@@ -287,4 +293,17 @@ string HelperMethod::dateSeparatedByDashes(int date)
     string day = newDate.substr(6, 2);
 
     return year + "-" + month + "-" + day;
+}
+
+bool HelperMethod::passwordLength(string password)
+{
+    system("CLS");
+    if (password.length() < 4)
+    {
+        cout << "The Password is to short ! The minimum number of characters is 4." << endl;
+        Sleep(2000);
+        system("CLS");
+        return false;
+    }
+    return true;
 }

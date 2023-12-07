@@ -22,11 +22,8 @@ void IncomesXmlFile::addIncomeToFile(Income incomes, string date, string amount)
     xml.AddElem( "ItemName", incomes.getItemName());
     xml.AddElem( "Amount", amount);
 
-
     xml.Save( INCOMES_FILE_NAME );
-
 }
-
 
 vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
 {

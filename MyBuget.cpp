@@ -84,6 +84,7 @@ void MyBuget::logOut()
     userMeneger.setLogoutUserId();
 }
 
-void MyBuget::changePassword(int loggedUserId){
- userMeneger.changePassword(loggedUserId);
+void MyBuget::changePassword(int loggedUserId)
+{
+    userMeneger.changePassword(loggedUserId);
 }
