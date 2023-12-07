@@ -60,3 +60,30 @@ vector <User> UserXmlFile::loadUsersFromXmlFile()
     return users;
 
 }
+
+void UserXmlFile::addUsersToFileAfterChangePassword(vector <User> &vec){
+
+    remove(USERS_FILE_NAME.c_str());
+    CMarkup xml;
+    xml.Load (USERS_FILE_NAME);
+
+    xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+    xml.AddElem( "Users" );
+    xml.IntoElem();
+    for(vector <User> :: iterator it = vec.begin() ; it != vec.end() ; ++it){
+
+    xml.AddElem( "User" );
+    xml.IntoElem();
+    xml.AddElem( "UserId", (*it).getUserId());
+    xml.AddElem( "Login", (*it).getUserLogin() );
+    xml.AddElem( "Password", (*it).getUserPassword());
+    xml.AddElem( "Name", (*it).getUserName());
+    xml.AddElem( "Surname", (*it).getUserSurname());
+    }
+
+
+    xml.Save( USERS_FILE_NAME );
+
+
+
+}

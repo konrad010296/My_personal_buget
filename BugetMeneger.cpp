@@ -354,12 +354,12 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
         }
         cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
         system("PAUSE");
-    }
 }
-
-void BugetMeneger::logOut(){
+}
+void BugetMeneger::logOut()
+{
     system("CLS");
     cout << "Thank you for using the My Budget App. See you !" << endl;
     Sleep(2000);
-idLoggedUser = 0;
+    idLoggedUser = 0;
 }

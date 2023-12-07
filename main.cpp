@@ -66,7 +66,7 @@ int main()
         break;
         case '6' :
         {
-
+            myBuget.changePassword(myBuget.getLoggedUserId());
         }
         break;
         case '7' :

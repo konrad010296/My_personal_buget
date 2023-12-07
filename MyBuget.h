@@ -41,6 +41,7 @@ public:
     void balanceSheetForTheCurrentMonth();
     void balanceFromThePreviousMonth();
     void balanceSheetForTheSelectedPeriod();
+    void changePassword(int loggedUserId);
 
 
 

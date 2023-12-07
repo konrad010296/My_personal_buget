@@ -19,6 +19,7 @@ public:
         idOfLastUser = 0;
     };
     void addUserToXmlFile(User user);
+    void addUsersToFileAfterChangePassword(vector <User> &vec);
     vector <User> loadUsersFromXmlFile();
 
 

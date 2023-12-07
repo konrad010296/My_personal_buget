@@ -54,10 +54,55 @@ void UserMeneger::logIn()
     return;
 }
 
+
+void UserMeneger::changePassword(int loggedUserId)
+{
+    string newPassword = "";
+    string repeatPassword = "";
+    int trials = 0;
+    bool correctData = false;
+
+    while(!correctData)
+    {
+        cout << "Enter new password : " << endl;
+        newPassword = HelperMethod::getLine();
+        cout << "Repeat password : " << endl;
+        repeatPassword = HelperMethod::getLine();
+
+        if(newPassword != repeatPassword)
+        {
+            cout << "The entered passwords are different !" << endl;
+            Sleep(2000);
+            trials++;
+        }
+        if(trials == 3)
+        {
+            cout << "The number of attempts has been exceeded!" << endl;
+            Sleep(2000);
+            return;
+        }
+        if(newPassword == repeatPassword)
+        {
+            correctData = true;
+        }
+    }
+
+    for(vector <User> :: iterator it = users.begin() ; it != users.end() ; ++it)
+    {
+
+        if(loggedUserId == (*it).getUserId())
+            (*it).setUserPassword(newPassword);
+        cout << "The password has been changed successfully !" << endl;
+        Sleep(2000);
+    }
+    userXmlFile.addUsersToFileAfterChangePassword(users);
+}
+
 int UserMeneger::getLoggedUserId()
 {
     return idOfLoggedUser;
 }
-int UserMeneger::setLogoutUserId(){
+int UserMeneger::setLogoutUserId()
+{
     idOfLoggedUser = 0;
 }
