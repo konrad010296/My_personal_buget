@@ -343,6 +343,7 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
         {
             if(((*it).getDate() >= start) && ((*it).getDate()) <= finish)
             {
+
                 sumExpenses += (*it).getAmount();
                 cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
                 cout << "Expense Id : " <<(*it).getExpenseId() << endl;
@@ -354,7 +355,7 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
         }
         cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
         system("PAUSE");
-}
+    }
 }
 void BugetMeneger::logOut()
 {
