@@ -76,3 +76,14 @@ void MyBuget::balanceSheetForTheSelectedPeriod()
         bugetMeneger->balanceSheetForTheSelectedPeriod();
     }
 }
+void MyBuget::logOut()
+{
+    bugetMeneger->logOut();
+    delete bugetMeneger;
+    bugetMeneger = NULL;
+    userMeneger.setLogoutUserId();
+}
+
+void MyBuget::changePassword(int loggedUserId){
+ userMeneger.changePassword(loggedUserId);
+}

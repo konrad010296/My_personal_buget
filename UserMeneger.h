@@ -31,6 +31,8 @@ public:
     void registerUser();
     void logIn();
     int getLoggedUserId();
+    int setLogoutUserId();
+    void changePassword(int loggedUserId);
 
 };
 #endif
