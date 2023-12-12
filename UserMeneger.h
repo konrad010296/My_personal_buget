@@ -33,6 +33,7 @@ public:
     int getLoggedUserId();
     void setLogoutUserId();
     void changePassword(int loggedUserId);
+    bool findSameUserName(string userLogin);
 
 };
 #endif

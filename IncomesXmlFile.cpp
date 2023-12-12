@@ -6,7 +6,7 @@ void IncomesXmlFile::addIncomeToFile(Income incomes)
     CMarkup xml;
     lastIncomeId = lastIncomeId + 1;
 
-    bool bSuccess = xml.Load (INCOMES_FILE_NAME);
+    bool bSuccess = xml.Load (getFileName());
 
     if(!bSuccess)
     {
@@ -23,7 +23,7 @@ void IncomesXmlFile::addIncomeToFile(Income incomes)
     xml.AddElem( "ItemName", incomes.getItemName());
     xml.AddElem( "Amount", HelperMethod::convertAmountToString(incomes.getAmount()));
 
-    xml.Save( INCOMES_FILE_NAME );
+    xml.Save( getFileName() );
 }
 
 vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
@@ -32,7 +32,7 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
     Income income;
 
     CMarkup xml;
-    xml.Load( INCOMES_FILE_NAME );
+    xml.Load( getFileName() );
 
     xml.FindElem();
     xml.IntoElem();

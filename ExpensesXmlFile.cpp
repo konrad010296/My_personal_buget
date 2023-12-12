@@ -5,7 +5,7 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense)
     CMarkup xml;
     lastExpenseId = lastExpenseId + 1;
 
-    bool bSuccess = xml.Load (EXPENSES_FILE_NAME);
+    bool bSuccess = xml.Load (getFileName());
 
     if(!bSuccess)
     {
@@ -21,7 +21,7 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense)
     xml.AddElem( "Date", DateMeneger::dateSeparatedByDashes(expense.getDate()));
     xml.AddElem( "ItemName", expense.getItemName());
     xml.AddElem( "Amount", HelperMethod::convertAmountToString(expense.getAmount()));
-    xml.Save( EXPENSES_FILE_NAME );
+    xml.Save( getFileName() );
 }
 
 vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
@@ -30,7 +30,7 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
     Expense expense;
 
     CMarkup xml;
-    xml.Load( EXPENSES_FILE_NAME );
+    xml.Load( getFileName() );
 
     xml.FindElem();
     xml.IntoElem();
