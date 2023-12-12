@@ -1,8 +1,9 @@
 #include "ExpensesXmlFile.h"
 
-void ExpensesXmlFile::addExpenseToFile(Expense expense, string date, string amount)
+void ExpensesXmlFile::addExpenseToFile(Expense expense)
 {
     CMarkup xml;
+    lastExpenseId = lastExpenseId + 1;
 
     bool bSuccess = xml.Load (EXPENSES_FILE_NAME);
 
@@ -15,11 +16,11 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense, string date, string amou
     xml.IntoElem();
     xml.AddElem( "Expense" );
     xml.IntoElem();
-    xml.AddElem( "ExpenseId", expense.getExpenseId());
+    xml.AddElem( "ExpenseId", lastExpenseId);
     xml.AddElem( "UserId", expense.getUserId());
-    xml.AddElem( "Date", date);
+    xml.AddElem( "Date", HelperMethod::dateSeparatedByDashes(expense.getDate()));
     xml.AddElem( "ItemName", expense.getItemName());
-    xml.AddElem( "Amount", amount);
+    xml.AddElem( "Amount", HelperMethod::convertAmountToString(expense.getAmount()));
     xml.Save( EXPENSES_FILE_NAME );
 }
 
@@ -38,8 +39,8 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.IntoElem();
         xml.FindElem( "ExpenseId" );
 
-        expense.setExpenseId(atoi(xml.GetData().c_str()));
         lastExpenseId = atoi(xml.GetData().c_str());
+        expense.setExpenseId(lastExpenseId);
         xml.FindElem( "UserId" );
         expense.setUserId(atoi(xml.GetData().c_str()));
         xml.FindElem( "Date" );
@@ -47,7 +48,7 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.FindElem( "ItemName" );
         expense.setItemName(xml.GetData());
         xml.FindElem( "Amount" );
-        expense.setAmount(HelperMethod::convertionStringToFloat(xml.GetData()));
+        expense.setAmount(stof(xml.GetData()));
 
         if(expense.getUserId() == idLoggedUser)
         {
@@ -56,5 +57,9 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.OutOfElem();
     }
     return expenses;
-
 }
+
+ int ExpensesXmlFile::getLastExpenseId()
+{
+    return lastExpenseId;
+ }

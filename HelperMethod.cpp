@@ -39,13 +39,6 @@ int HelperMethod::convertionStringToInt(string digit)
     return toInt;
 }
 
-float HelperMethod::convertionStringToFloat(string digit)
-{
-    float num_float = stof(digit);
-
-    return num_float;
-}
-
 string HelperMethod::getCurrentDate()
 {
 
@@ -70,25 +63,15 @@ bool HelperMethod::askAboutDate()
         cout << "Do I want to set today's date? If so click 'y' " << endl;
         cout << "Do I want to set other date? If so click 'o' " << endl;
         choise = getch();
+        system("CLS");
 
         switch(choise)
         {
-        case 'y':
-        {
-            system("CLS");
-            return true;
-        }
-        break;
-        case 'o':
-        {
-            system("CLS");
-            return false;
-        }
-        break;
+        case 'y': return true; break;
+        case 'o': return false; break;
         }
         cout << "Correct choise !!" << endl;
         Sleep(2000);
-        system("CLS");
     }
 }
 bool HelperMethod::checkDateFormat(string date)
@@ -123,9 +106,15 @@ int HelperMethod::convetionDateToInt(string date)
     return dateToInt;
 }
 
-int HelperMethod::calculateDaysInMonth(int yearDigit,int monthDigit)
+int HelperMethod::calculateDaysInMonth(string date)
 {
+    int yearDigit = 0;
+    int monthDigit = 0;
     int daysInMonth = 0;
+
+    yearDigit = convertionStringToInt(date.substr(0, 4));
+    monthDigit = convertionStringToInt(date.substr(5, 2));
+
     if (monthDigit == 2)
     {
         if ((yearDigit % 400 == 0) || (yearDigit % 4 == 0 && yearDigit % 100 != 0))
@@ -179,9 +168,9 @@ bool HelperMethod::checkDateRage(string date)
 
     currentYear = convertionStringToInt(currentDateYear);
     currentMonth = convertionStringToInt(currentDateMonth);
-    currentDaysInMonth = calculateDaysInMonth(currentYear,currentMonth);
+    currentDaysInMonth = calculateDaysInMonth(currentDate);
 
-    daysInMonth = calculateDaysInMonth(yearDigit,monthDigit);
+    daysInMonth = calculateDaysInMonth(date);
 
     if(dayDigit > daysInMonth)
     {
@@ -267,20 +256,20 @@ string HelperMethod::changeDateToBeginningMonth(string word)
     return begginingMonth;
 }
 
-string HelperMethod::connectLastDayWitchCurrentMounth(string date, int day)
+int HelperMethod::connectLastDayWitchCurrentMounth(int date, int day)
 {
-
     string convertedDay = to_string(day);
+    string convertedDate = to_string(date);
     string endOfMounth = "";
 
-    for(int i = 0 ; i < 8 ; i++)
+    for(int i = 0 ; i < 6 ; i++)
     {
 
-        endOfMounth += date[i];
+        endOfMounth += convertedDate[i];
     }
     endOfMounth += convertedDay;
 
-    return endOfMounth;
+    return convertionStringToInt(endOfMounth);
 
 }
 
@@ -306,4 +295,40 @@ bool HelperMethod::passwordLength(string password)
         return false;
     }
     return true;
+}
+
+string HelperMethod::convertAmountToString(float amount){
+    ostringstream stream;
+    stream << fixed << setprecision(2) << amount;
+    string score = stream.str();
+    return score;
+}
+
+string HelperMethod::getBeginningPerviousMonth(string actualDate){
+
+    string year = actualDate.substr(0, 4);
+    string month = actualDate.substr(5, 2);
+    int yearDigit = HelperMethod::convertionStringToInt(year);
+    int monthDigit = HelperMethod::convertionStringToInt(month);
+
+    if(monthDigit == 1)
+    {
+        yearDigit = yearDigit - 1;
+        monthDigit = 12;
+    }
+    else
+        monthDigit = monthDigit - 1;
+
+    if(monthDigit < 10)
+    {
+        month = "0" + to_string(monthDigit) + "-01";
+        year = to_string(yearDigit) + "-";
+    }
+    else
+    {
+        month = to_string(monthDigit)+ "-01";
+        year = to_string(yearDigit)+ "-";
+    }
+
+    return year + month;
 }

@@ -20,18 +20,15 @@ class BugetMeneger
     ExpensesXmlFile expenseXmlFile;
     vector <Income> incomes;
     vector <Expense> expenses;
-    int idLoggedUser;
-    float sumOfExpenses;
-    float sumOfIncomes;
+    const int IDLOGGEDUSER;
+    void printBalance(int startDate, int endDate);
 
 
 public:
-    BugetMeneger(string incomesFileName,string expensesFileName, int loggedUser) : incomeXmlFile(incomesFileName), expenseXmlFile(expensesFileName), idLoggedUser(loggedUser)
+    BugetMeneger(string incomesFileName,string expensesFileName, int loggedUser) : incomeXmlFile(incomesFileName), expenseXmlFile(expensesFileName), IDLOGGEDUSER(loggedUser)
     {
-        incomes = incomeXmlFile.loadIncomesFromXmlFile(idLoggedUser);
-        expenses = expenseXmlFile.readExpensesFromFile(idLoggedUser);
-        sumOfExpenses = 0;
-        sumOfIncomes = 0;
+        incomes = incomeXmlFile.loadIncomesFromXmlFile(IDLOGGEDUSER);
+        expenses = expenseXmlFile.readExpensesFromFile(IDLOGGEDUSER);
     };
     void addIncome();
     void addAnExpense();
