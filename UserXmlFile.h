@@ -2,28 +2,24 @@
 #define USERXMLFILE_H
 #include <iostream>
 #include "Markup.h"
+#include "XmlFile.h"
 #include "User.h"
 #include <vector>
 #include <windows.h>
 
 using namespace std;
 
-class UserXmlFile
+class UserXmlFile : private XmlFile
 {
-
-    const string USERS_FILE_NAME;
     int idOfLastUser;
     vector <User> users;
 public:
-    UserXmlFile(string usersFileName) : USERS_FILE_NAME(usersFileName)
+    UserXmlFile(string usersFileName) : XmlFile(usersFileName)
     {
         idOfLastUser = 0;
     };
     void addUserToXmlFile(User user);
     void addUsersToFileAfterChangePassword(vector <User> &vec);
     vector <User> loadUsersFromXmlFile();
-
-
 };
-
 #endif

@@ -5,16 +5,17 @@
 #include <vector>
 #include "Markup.h"
 #include "HelperMethod.h"
+#include "XmlFile.h"
+#include "DateMeneger.h"
 
 using namespace std;
 
-class IncomesXmlFile
+class IncomesXmlFile : private XmlFile
 {
-    const string INCOMES_FILE_NAME;
     int lastIncomeId;
 
 public:
-    IncomesXmlFile(string incomesFileName) : INCOMES_FILE_NAME(incomesFileName)
+    IncomesXmlFile(string incomesFileName) : XmlFile(incomesFileName)
     {
         lastIncomeId = 0;
     };

@@ -5,7 +5,7 @@ void UserXmlFile::addUserToXmlFile(User user)
     system("CLS");
     CMarkup xml;
 
-    bool bSuccess = xml.Load (USERS_FILE_NAME);
+    bool bSuccess = xml.Load (getFileName());
 
     idOfLastUser++;
     if(!bSuccess)
@@ -23,7 +23,7 @@ void UserXmlFile::addUserToXmlFile(User user)
     xml.AddElem( "Name", user.getUserName() );
     xml.AddElem( "Surname", user.getUserSurname() );
 
-    xml.Save( USERS_FILE_NAME );
+    xml.Save(getFileName());
     cout << "You have been registered successfully!" << endl;
     Sleep(2000);
 
@@ -35,7 +35,7 @@ vector <User> UserXmlFile::loadUsersFromXmlFile()
     vector <User> users;
     User user;
     CMarkup xml;
-    xml.Load( USERS_FILE_NAME );
+    xml.Load(getFileName());
 
     xml.FindElem();
     xml.IntoElem();
@@ -65,15 +65,15 @@ vector <User> UserXmlFile::loadUsersFromXmlFile()
 void UserXmlFile::addUsersToFileAfterChangePassword(vector <User> &vec)
 {
 
-    remove(USERS_FILE_NAME.c_str());
+    remove(getFileName().c_str());
     CMarkup xml;
 
 
     for(vector <User> :: iterator it = vec.begin() ; it != vec.end() ; ++it)
     {
-        xml.Load (USERS_FILE_NAME);
+        xml.Load (getFileName());
 
-        bool bSuccess = xml.Load (USERS_FILE_NAME);
+        bool bSuccess = xml.Load (getFileName());
 
         idOfLastUser++;
         if(!bSuccess)
@@ -90,6 +90,6 @@ void UserXmlFile::addUsersToFileAfterChangePassword(vector <User> &vec)
         xml.AddElem( "Password", (*it).getUserPassword());
         xml.AddElem( "Name", (*it).getUserName());
         xml.AddElem( "Surname", (*it).getUserSurname());
-        xml.Save( USERS_FILE_NAME );
+        xml.Save( getFileName() );
     }
 }

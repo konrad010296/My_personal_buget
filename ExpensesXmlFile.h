@@ -4,17 +4,21 @@
 #include <vector>
 #include "Expense.h"
 #include "HelperMethod.h"
+#include "DateMeneger.h"
+#include "XmlFile.h"
 #include "Markup.h"
 
 using namespace std;
 
-class ExpensesXmlFile{
-    const string EXPENSES_FILE_NAME;
+class ExpensesXmlFile : private XmlFile
+{
+
     int lastExpenseId;
 
 public:
-    ExpensesXmlFile(string expensesFilename) : EXPENSES_FILE_NAME(expensesFilename){
-    lastExpenseId = 0;
+    ExpensesXmlFile(string expensesFilename) : XmlFile(expensesFilename)
+    {
+        lastExpenseId = 0;
     };
     void addExpenseToFile(Expense expense);
     vector <Expense> readExpensesFromFile(int idLoggedUser);

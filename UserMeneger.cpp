@@ -12,8 +12,12 @@ void UserMeneger::registerUser()
         user.setUserName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
         cout << "Enter Surname : " << endl;
         user.setUserSurname(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
-        cout << "Enter Login : " << endl;
-        user.setUserLogin(HelperMethod::getLine());
+        do
+        {
+            cout << "Enter Login : " << endl;
+            user.setUserLogin(HelperMethod::getLine());
+        }
+        while (!findSameUserName(user.getUserLogin()));
         cout << "Enter Password : " << endl;
         user.setUserPassword(HelperMethod::getLine());
         passwordLength = HelperMethod::passwordLength(user.getUserPassword());
@@ -116,3 +120,21 @@ void UserMeneger::setLogoutUserId()
 {
     idOfLoggedUser = 0;
 }
+
+bool UserMeneger::findSameUserName(string userLogin)
+{
+
+    for(vector <User> :: iterator it = users.begin() ; it != users.end() ; ++it)
+    {
+
+        if(userLogin == (*it).getUserLogin())
+        {
+            cout << "Login is busy!!" << endl;
+            Sleep(2000);
+            system("CLS");
+            return false;
+        }
+    }
+    return true;
+}
+
