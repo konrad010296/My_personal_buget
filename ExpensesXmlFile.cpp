@@ -18,7 +18,7 @@ void ExpensesXmlFile::addExpenseToFile(Expense expense)
     xml.IntoElem();
     xml.AddElem( "ExpenseId", lastExpenseId);
     xml.AddElem( "UserId", expense.getUserId());
-    xml.AddElem( "Date", HelperMethod::dateSeparatedByDashes(expense.getDate()));
+    xml.AddElem( "Date", DateMeneger::dateSeparatedByDashes(expense.getDate()));
     xml.AddElem( "ItemName", expense.getItemName());
     xml.AddElem( "Amount", HelperMethod::convertAmountToString(expense.getAmount()));
     xml.Save( EXPENSES_FILE_NAME );
@@ -44,7 +44,7 @@ vector <Expense> ExpensesXmlFile::readExpensesFromFile(int idLoggedUser)
         xml.FindElem( "UserId" );
         expense.setUserId(atoi(xml.GetData().c_str()));
         xml.FindElem( "Date" );
-        expense.setDate(HelperMethod::convetionDateToInt(xml.GetData()));
+        expense.setDate(DateMeneger::convetionDateToInt(xml.GetData()));
         xml.FindElem( "ItemName" );
         expense.setItemName(xml.GetData());
         xml.FindElem( "Amount" );

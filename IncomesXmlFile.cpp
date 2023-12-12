@@ -19,7 +19,7 @@ void IncomesXmlFile::addIncomeToFile(Income incomes)
     xml.IntoElem();
     xml.AddElem( "IncomeId", lastIncomeId);
     xml.AddElem( "UserId", incomes.getUserId());
-    xml.AddElem( "Date", HelperMethod::dateSeparatedByDashes(incomes.getDate()));
+    xml.AddElem( "Date", DateMeneger::dateSeparatedByDashes(incomes.getDate()));
     xml.AddElem( "ItemName", incomes.getItemName());
     xml.AddElem( "Amount", HelperMethod::convertAmountToString(incomes.getAmount()));
 
@@ -46,7 +46,7 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.FindElem( "UserId" );
         income.setUserId(atoi(xml.GetData().c_str()));
         xml.FindElem( "Date" );
-        income.setDate(HelperMethod::convetionDateToInt(xml.GetData()));
+        income.setDate(DateMeneger::convetionDateToInt(xml.GetData()));
         xml.FindElem( "ItemName" );
         income.setItemName(xml.GetData());
         xml.FindElem( "Amount" );

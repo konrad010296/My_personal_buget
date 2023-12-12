@@ -10,10 +10,10 @@ void BugetMeneger::addIncome()
     bool goodDateRage = false;
     income.setIncomeId(incomeXmlFile.getLastIncomeId() + 1);
     income.setUserId(IDLOGGEDUSER);
-    if(HelperMethod::askAboutDate())
+    if(DateMeneger::askAboutDate())
     {
-        date = HelperMethod::getCurrentDate();
-        income.setDate(HelperMethod::convetionDateToInt(date));
+        date = DateMeneger::getCurrentDate();
+        income.setDate(DateMeneger::convetionDateToInt(date));
     }
     else
     {
@@ -22,12 +22,12 @@ void BugetMeneger::addIncome()
             cout << "Set date in format rrrr-mm-dd : " << endl;
             date = HelperMethod::getLine();
 
-            goodFormatDate = HelperMethod::checkDateFormat(date);
+            goodFormatDate = DateMeneger::checkDateFormat(date);
             if(goodFormatDate)
-                goodDateRage = HelperMethod::checkDateRage(date);
+                goodDateRage = DateMeneger::checkDateRage(date);
         }
     }
-    income.setDate(HelperMethod::convetionDateToInt(date));
+    income.setDate(DateMeneger::convetionDateToInt(date));
     cout << "Title of income : " << endl;
     income.setItemName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Amount : " << endl;
@@ -54,10 +54,10 @@ void BugetMeneger::addAnExpense()
 
     expense.setExpenseId(expenseXmlFile.getLastExpenseId() + 1);
     expense.setUserId(IDLOGGEDUSER);
-    if(HelperMethod::askAboutDate())
+    if(DateMeneger::askAboutDate())
     {
-        date = HelperMethod::getCurrentDate();
-        expense.setDate(HelperMethod::convetionDateToInt(date));
+        date = DateMeneger::getCurrentDate();
+        expense.setDate(DateMeneger::convetionDateToInt(date));
     }
     else
     {
@@ -65,12 +65,12 @@ void BugetMeneger::addAnExpense()
         {
             cout << "Set date in format rrrr-mm-dd : " << endl;
             date = HelperMethod::getLine();
-            goodFormatDate = HelperMethod::checkDateFormat(date);
+            goodFormatDate = DateMeneger::checkDateFormat(date);
             if(goodFormatDate)
-                goodDateRage = HelperMethod::checkDateRage(date);
+                goodDateRage = DateMeneger::checkDateRage(date);
         }
     }
-    expense.setDate(HelperMethod::convetionDateToInt(date));
+    expense.setDate(DateMeneger::convetionDateToInt(date));
     cout << "Item name : " << endl;
     expense.setItemName(HelperMethod::replaceWithCapitalLetter(HelperMethod::getLine()));
     cout << "Amount : " << endl;
@@ -92,11 +92,11 @@ void BugetMeneger::balanceSheetForTheCurrentMonth()
     int startMonth = 0;
     int endMonth = 0;
     int lastDayInMonth = 0;
-    beginningCurrentMonth = HelperMethod::getCurrentDate();
-    beginningCurrentMonth = HelperMethod::changeDateToBeginningMonth(beginningCurrentMonth);
-    lastDayInMonth = HelperMethod::calculateDaysInMonth(beginningCurrentMonth);
-    startMonth = HelperMethod::convetionDateToInt(beginningCurrentMonth);
-    endMonth = HelperMethod::connectLastDayWitchCurrentMounth(startMonth, lastDayInMonth);
+    beginningCurrentMonth = DateMeneger::getCurrentDate();
+    beginningCurrentMonth = DateMeneger::changeDateToBeginningMonth(beginningCurrentMonth);
+    lastDayInMonth = DateMeneger::calculateDaysInMonth(beginningCurrentMonth);
+    startMonth = DateMeneger::convetionDateToInt(beginningCurrentMonth);
+    endMonth = DateMeneger::connectLastDayWitchCurrentMounth(startMonth, lastDayInMonth);
     system("CLS");
 
     printBalance(startMonth, endMonth);
@@ -111,12 +111,12 @@ void BugetMeneger::balanceFromThePreviousMonth()
     string endOfPerviousMonth = "";
     int lastDayInMonth = 0;
 
-    currentMonth = HelperMethod::getCurrentDate();
-    beginningPerviousMonth = HelperMethod::getBeginningPerviousMonth(currentMonth);
-    lastDayInMonth = HelperMethod::calculateDaysInMonth(beginningPerviousMonth);
+    currentMonth = DateMeneger::getCurrentDate();
+    beginningPerviousMonth = DateMeneger::getBeginningPerviousMonth(currentMonth);
+    lastDayInMonth = DateMeneger::calculateDaysInMonth(beginningPerviousMonth);
 
-    startMonth = HelperMethod::convetionDateToInt(beginningPerviousMonth);
-    endMonth = HelperMethod::connectLastDayWitchCurrentMounth(startMonth,lastDayInMonth);
+    startMonth = DateMeneger::convetionDateToInt(beginningPerviousMonth);
+    endMonth = DateMeneger::connectLastDayWitchCurrentMounth(startMonth,lastDayInMonth);
     system("CLS");
 
      printBalance(startMonth, endMonth);
@@ -139,23 +139,23 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
     {
         cout << "Enter the starting date in format dddd-mm-dd" << endl;
         startDate = HelperMethod::getLine();
-        goodFormatStartDate = HelperMethod::checkDateFormat(startDate);
+        goodFormatStartDate = DateMeneger::checkDateFormat(startDate);
 
         if(goodFormatStartDate)
-            goodDateStartRage = HelperMethod::checkDateRage(startDate);
+            goodDateStartRage = DateMeneger::checkDateRage(startDate);
     }
-    start = HelperMethod::convetionDateToInt(startDate);
+    start = DateMeneger::convetionDateToInt(startDate);
 
     while(!goodDateFinishRage)
     {
         cout << "Enter the finishing date in format dddd-mm-dd" << endl;
         endDate = HelperMethod::getLine();
-        goodFormatFinishDate = HelperMethod::checkDateFormat(endDate);
+        goodFormatFinishDate = DateMeneger::checkDateFormat(endDate);
 
         if(goodFormatFinishDate)
-            goodDateFinishRage = HelperMethod::checkDateRage(endDate);
+            goodDateFinishRage = DateMeneger::checkDateRage(endDate);
     }
-    finish = HelperMethod::convetionDateToInt(endDate);
+    finish = DateMeneger::convetionDateToInt(endDate);
 
     if(start > finish)
     {
@@ -195,7 +195,7 @@ void BugetMeneger::printBalance(int startDate, int endDate){
         if(((*it).getDate() >= startDate) && ((*it).getDate()) <= endDate)
         {
             sumIncomes += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
+            cout << "Date : " << DateMeneger::dateSeparatedByDashes((*it).getDate()) << endl;
             cout << "Income Id : " <<(*it).getIncomeId() << endl;
             cout << "User Id : " <<(*it).getUserId() << endl;
             cout << "Title of income : " <<(*it).getItemName() << endl;
@@ -216,7 +216,7 @@ void BugetMeneger::printBalance(int startDate, int endDate){
         if(((*it).getDate() >= startDate) && ((*it).getDate()) <= endDate)
         {
             sumExpenses += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
+            cout << "Date : " << DateMeneger::dateSeparatedByDashes((*it).getDate()) << endl;
             cout << "Expense Id : " <<(*it).getExpenseId() << endl;
             cout << "User Id : " <<(*it).getUserId() << endl;
             cout << "Item Name : " <<(*it).getItemName() << endl;
