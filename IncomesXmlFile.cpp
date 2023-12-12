@@ -1,9 +1,10 @@
 #include "IncomesXmlFile.h"
 
-void IncomesXmlFile::addIncomeToFile(Income incomes, string date, string amount)
+void IncomesXmlFile::addIncomeToFile(Income incomes)
 {
 
     CMarkup xml;
+    lastIncomeId = lastIncomeId + 1;
 
     bool bSuccess = xml.Load (INCOMES_FILE_NAME);
 
@@ -16,11 +17,11 @@ void IncomesXmlFile::addIncomeToFile(Income incomes, string date, string amount)
     xml.IntoElem();
     xml.AddElem( "Income" );
     xml.IntoElem();
-    xml.AddElem( "IncomeId", incomes.getIncomeId());
+    xml.AddElem( "IncomeId", lastIncomeId);
     xml.AddElem( "UserId", incomes.getUserId());
-    xml.AddElem( "Date", date);
+    xml.AddElem( "Date", HelperMethod::dateSeparatedByDashes(incomes.getDate()));
     xml.AddElem( "ItemName", incomes.getItemName());
-    xml.AddElem( "Amount", amount);
+    xml.AddElem( "Amount", HelperMethod::convertAmountToString(incomes.getAmount()));
 
     xml.Save( INCOMES_FILE_NAME );
 }
@@ -40,8 +41,8 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.IntoElem();
         xml.FindElem( "IncomeId" );
 
-        income.setIncomeId(atoi(xml.GetData().c_str()));
         lastIncomeId = atoi(xml.GetData().c_str());
+        income.setIncomeId(lastIncomeId);
         xml.FindElem( "UserId" );
         income.setUserId(atoi(xml.GetData().c_str()));
         xml.FindElem( "Date" );
@@ -49,7 +50,7 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
         xml.FindElem( "ItemName" );
         income.setItemName(xml.GetData());
         xml.FindElem( "Amount" );
-        income.setAmount(HelperMethod::convertionStringToFloat(xml.GetData()));
+        income.setAmount(stof(xml.GetData()));
 
         if(income.getUserId() == idLoggedUser)
         {
@@ -61,3 +62,6 @@ vector <Income> IncomesXmlFile::loadIncomesFromXmlFile(int idLoggedUser)
 
 }
 
+int IncomesXmlFile::getLastIncomeId(){
+return lastIncomeId;
+}

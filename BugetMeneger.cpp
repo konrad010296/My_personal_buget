@@ -8,12 +8,8 @@ void BugetMeneger::addIncome()
     Income income;
     bool goodFormatDate = false;
     bool goodDateRage = false;
-
-    if(incomes.size() == 0)
-        income.setIncomeId(1);
-    else
-        income.setIncomeId(incomes[incomes.size() - 1].getIncomeId() + 1);
-    income.setUserId(idLoggedUser);
+    income.setIncomeId(incomeXmlFile.getLastIncomeId() + 1);
+    income.setUserId(IDLOGGEDUSER);
     if(HelperMethod::askAboutDate())
     {
         date = HelperMethod::getCurrentDate();
@@ -37,10 +33,10 @@ void BugetMeneger::addIncome()
     cout << "Amount : " << endl;
     amount = HelperMethod::getLine();
     amount = HelperMethod::replaceTheCommaWithDot(amount);
-    income.setAmount(HelperMethod::convertionStringToFloat(amount));
+    income.setAmount(stof(amount));
 
     incomes.push_back(income);
-    incomeXmlFile.addIncomeToFile(income, date, amount);
+    incomeXmlFile.addIncomeToFile(income);
     system("CLS");
 
     cout << "Your income has been added successfully !" << endl;
@@ -56,12 +52,8 @@ void BugetMeneger::addAnExpense()
     bool goodFormatDate = false;
     bool goodDateRage = false;
 
-
-    if(expenses.size() == 0)
-        expense.setExpenseId(1);
-    else
-        expense.setExpenseId(incomes[expenses.size() - 1].getIncomeId() + 1);
-    expense.setUserId(idLoggedUser);
+    expense.setExpenseId(expenseXmlFile.getLastExpenseId() + 1);
+    expense.setUserId(IDLOGGEDUSER);
     if(HelperMethod::askAboutDate())
     {
         date = HelperMethod::getCurrentDate();
@@ -84,10 +76,10 @@ void BugetMeneger::addAnExpense()
     cout << "Amount : " << endl;
     amount = HelperMethod::getLine();
     amount = HelperMethod::replaceTheCommaWithDot(amount);
-    expense.setAmount(HelperMethod::convertionStringToFloat(amount));
+    expense.setAmount(stof(amount));
 
     expenses.push_back(expense);
-    expenseXmlFile.addExpenseToFile(expense, date, amount);
+    expenseXmlFile.addExpenseToFile(expense);
     system("CLS");
 
     cout << "Your expense has been added successfully !" << endl;
@@ -96,171 +88,38 @@ void BugetMeneger::addAnExpense()
 
 void BugetMeneger::balanceSheetForTheCurrentMonth()
 {
-    vector <Income> :: iterator it;
+    string beginningCurrentMonth = "";
     int startMonth = 0;
     int endMonth = 0;
-    string beginningCurrentMonth = "";
-    string year = "";
-    string month = "";
-    int yearDigit = 0;
-    int monthDigit = 0;
-    int daysInMonth = 0;
-    string endOfCurrentMonth = "";
-    float sumIncomes = 0;
-    float sumExpenses = 0;
-
+    int lastDayInMonth = 0;
     beginningCurrentMonth = HelperMethod::getCurrentDate();
-    year = beginningCurrentMonth.substr(0, 4);
-    month = beginningCurrentMonth.substr(5, 2);
-    yearDigit = HelperMethod::convertionStringToInt(year);
-    monthDigit = HelperMethod::convertionStringToInt(month);
-    daysInMonth = HelperMethod::calculateDaysInMonth(yearDigit, monthDigit);
     beginningCurrentMonth = HelperMethod::changeDateToBeginningMonth(beginningCurrentMonth);
-    endOfCurrentMonth = HelperMethod::connectLastDayWitchCurrentMounth(beginningCurrentMonth, daysInMonth);
-
+    lastDayInMonth = HelperMethod::calculateDaysInMonth(beginningCurrentMonth);
     startMonth = HelperMethod::convetionDateToInt(beginningCurrentMonth);
-    endMonth = HelperMethod::convetionDateToInt(endOfCurrentMonth);
-
+    endMonth = HelperMethod::connectLastDayWitchCurrentMounth(startMonth, lastDayInMonth);
     system("CLS");
 
-    cout << "INCOMES" << endl;
-    cout <<  endl;
-    sort( incomes.begin( ), incomes.end( ), [ ]( Income& lhs, Income& rhs )
-    {
-        return lhs.getDate() < rhs.getDate();
-    });
-
-    for(vector <Income> :: iterator it = incomes.begin() ; it != incomes.end() ; ++it)
-    {
-        if(((*it).getDate() >= startMonth) && ((*it).getDate()) <= endMonth)
-        {
-            sumIncomes += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-            cout << "Income Id : " <<(*it).getIncomeId() << endl;
-            cout << "User Id : " <<(*it).getUserId() << endl;
-            cout << "Title of income : " <<(*it).getItemName() << endl;
-            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-            cout << endl;
-        }
-    }
-
-    sort( expenses.begin( ), expenses.end( ), [ ]( Expense& lhs, Expense& rhs )
-    {
-        return lhs.getDate() < rhs.getDate();
-    });
-
-    cout << "EXPENSES" << endl;
-    cout <<  endl;
-    for(vector <Expense> :: iterator it = expenses.begin() ; it != expenses.end() ; ++it)
-    {
-        if(((*it).getDate() >= startMonth) && ((*it).getDate()) <= endMonth)
-        {
-            sumExpenses += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-            cout << "Expense Id : " <<(*it).getExpenseId() << endl;
-            cout << "User Id : " <<(*it).getUserId() << endl;
-            cout << "Item Name : " <<(*it).getItemName() << endl;
-            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-            cout << endl;
-        }
-    }
-    cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
-    system("PAUSE");
-
+    printBalance(startMonth, endMonth);
 }
 
 void BugetMeneger::balanceFromThePreviousMonth()
 {
-    vector <Income> :: iterator it;
     int startMonth = 0;
     int endMonth = 0;
     string currentMonth = "";
     string beginningPerviousMonth = "";
     string endOfPerviousMonth = "";
-    string year = "";
-    string month = "";
-    int yearDigit = 0;
-    int monthDigit = 0;
-    int daysInMonth = 0;
-    float sumIncomes = 0;
-    float sumExpenses = 0;
-
+    int lastDayInMonth = 0;
 
     currentMonth = HelperMethod::getCurrentDate();
-    year = currentMonth.substr(0, 4);
-    month = currentMonth.substr(5, 2);
-    yearDigit = HelperMethod::convertionStringToInt(year);
-    monthDigit = HelperMethod::convertionStringToInt(month);
-    if(monthDigit == 1)
-    {
-        yearDigit = yearDigit - 1;
-        monthDigit = 12;
-    }
-    else
-        monthDigit = monthDigit - 1;
+    beginningPerviousMonth = HelperMethod::getBeginningPerviousMonth(currentMonth);
+    lastDayInMonth = HelperMethod::calculateDaysInMonth(beginningPerviousMonth);
 
-    if(monthDigit < 10)
-    {
-        month = "0" + to_string(monthDigit) + "-";
-        year = to_string(yearDigit) + "-";
-    }
-    else
-    {
-        month = to_string(monthDigit)+ "-";
-        year = to_string(yearDigit)+ "-";
-    }
-    daysInMonth = HelperMethod::calculateDaysInMonth(yearDigit, monthDigit);
-    beginningPerviousMonth = beginningPerviousMonth + year + month + "01";
-
-    endOfPerviousMonth = HelperMethod::connectLastDayWitchCurrentMounth(beginningPerviousMonth, daysInMonth);
     startMonth = HelperMethod::convetionDateToInt(beginningPerviousMonth);
-    endMonth = HelperMethod::convetionDateToInt(endOfPerviousMonth);
-
+    endMonth = HelperMethod::connectLastDayWitchCurrentMounth(startMonth,lastDayInMonth);
     system("CLS");
 
-    cout << "INCOMES" << endl;
-    cout <<  endl;
-    sort( incomes.begin( ), incomes.end( ), [ ]( Income& lhs, Income& rhs )
-    {
-        return lhs.getDate() < rhs.getDate();
-    });
-
-    for(vector <Income> :: iterator it = incomes.begin() ; it != incomes.end() ; ++it)
-    {
-        if(((*it).getDate() >= startMonth) && ((*it).getDate()) <= endMonth)
-        {
-            sumIncomes += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-            cout << "Income Id : " <<(*it).getIncomeId() << endl;
-            cout << "User Id : " <<(*it).getUserId() << endl;
-            cout << "Title of income : " <<(*it).getItemName() << endl;
-            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-            cout << endl;
-        }
-    }
-
-    sort( expenses.begin( ), expenses.end( ), [ ]( Expense& lhs, Expense& rhs )
-    {
-        return lhs.getDate() < rhs.getDate();
-    });
-
-    cout << "EXPENSES" << endl;
-    cout <<  endl;
-    for(vector <Expense> :: iterator it = expenses.begin() ; it != expenses.end() ; ++it)
-    {
-        if(((*it).getDate() >= startMonth) && ((*it).getDate()) <= endMonth)
-        {
-            sumExpenses += (*it).getAmount();
-            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-            cout << "Expense Id : " <<(*it).getExpenseId() << endl;
-            cout << "User Id : " <<(*it).getUserId() << endl;
-            cout << "Item Name : " <<(*it).getItemName() << endl;
-            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-            cout << endl;
-        }
-    }
-    cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
-    system("PAUSE");
+     printBalance(startMonth, endMonth);
 
 }
 
@@ -274,16 +133,14 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
     bool goodDateStartRage = false;
     bool goodFormatFinishDate = false;
     bool goodDateFinishRage = false;
-    float sumIncomes = 0;
-    float sumExpenses = 0;
     system("CLS");
 
     while(!goodDateStartRage)
     {
         cout << "Enter the starting date in format dddd-mm-dd" << endl;
         startDate = HelperMethod::getLine();
-
         goodFormatStartDate = HelperMethod::checkDateFormat(startDate);
+
         if(goodFormatStartDate)
             goodDateStartRage = HelperMethod::checkDateRage(startDate);
     }
@@ -293,8 +150,8 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
     {
         cout << "Enter the finishing date in format dddd-mm-dd" << endl;
         endDate = HelperMethod::getLine();
-
         goodFormatFinishDate = HelperMethod::checkDateFormat(endDate);
+
         if(goodFormatFinishDate)
             goodDateFinishRage = HelperMethod::checkDateRage(endDate);
     }
@@ -309,58 +166,65 @@ void BugetMeneger::balanceSheetForTheSelectedPeriod()
     }
     else
     {
-        system("CLS");
-
-        cout << "INCOMES" << endl;
-        cout <<  endl;
-        sort( incomes.begin( ), incomes.end( ), [ ]( Income& lhs, Income& rhs )
-        {
-            return lhs.getDate() < rhs.getDate();
-        });
-
-        for(vector <Income> :: iterator it = incomes.begin() ; it != incomes.end() ; ++it)
-        {
-            if(((*it).getDate() >= start) && ((*it).getDate()) <= finish)
-            {
-                sumIncomes += (*it).getAmount();
-                cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-                cout << "Income Id : " <<(*it).getIncomeId() << endl;
-                cout << "User Id : " <<(*it).getUserId() << endl;
-                cout << "Title of income : " <<(*it).getItemName() << endl;
-                cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-                cout << endl;
-            }
-        }
-
-        sort( expenses.begin( ), expenses.end( ), [ ]( Expense& lhs, Expense& rhs )
-        {
-            return lhs.getDate() < rhs.getDate();
-        });
-
-        cout << "EXPENSES" << endl;
-        cout <<  endl;
-        for(vector <Expense> :: iterator it = expenses.begin() ; it != expenses.end() ; ++it)
-        {
-            if(((*it).getDate() >= start) && ((*it).getDate()) <= finish)
-            {
-
-                sumExpenses += (*it).getAmount();
-                cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
-                cout << "Expense Id : " <<(*it).getExpenseId() << endl;
-                cout << "User Id : " <<(*it).getUserId() << endl;
-                cout << "Item Name : " <<(*it).getItemName() << endl;
-                cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
-                cout << endl;
-            }
-        }
-        cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
-        system("PAUSE");
-    }
+    printBalance(start, finish);
 }
+}
+
 void BugetMeneger::logOut()
 {
     system("CLS");
     cout << "Thank you for using the My Budget App. See you !" << endl;
     Sleep(2000);
-    idLoggedUser = 0;
+}
+
+void BugetMeneger::printBalance(int startDate, int endDate){
+
+    float sumIncomes = 0;
+    float sumExpenses = 0;
+
+    sort( incomes.begin( ), incomes.end( ), [ ]( Income& lhs, Income& rhs )
+    {
+        return lhs.getDate() < rhs.getDate();
+    });
+
+    cout << "INCOMES" << endl;
+    cout <<  endl;
+
+    for(vector <Income> :: iterator it = incomes.begin() ; it != incomes.end() ; ++it)
+    {
+        if(((*it).getDate() >= startDate) && ((*it).getDate()) <= endDate)
+        {
+            sumIncomes += (*it).getAmount();
+            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
+            cout << "Income Id : " <<(*it).getIncomeId() << endl;
+            cout << "User Id : " <<(*it).getUserId() << endl;
+            cout << "Title of income : " <<(*it).getItemName() << endl;
+            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
+            cout << endl;
+        }
+    }
+
+    sort( expenses.begin( ), expenses.end( ), [ ]( Expense& lhs, Expense& rhs )
+    {
+        return lhs.getDate() < rhs.getDate();
+    });
+
+    cout << "EXPENSES" << endl;
+    cout <<  endl;
+    for(vector <Expense> :: iterator it = expenses.begin() ; it != expenses.end() ; ++it)
+    {
+        if(((*it).getDate() >= startDate) && ((*it).getDate()) <= endDate)
+        {
+            sumExpenses += (*it).getAmount();
+            cout << "Date : " << HelperMethod::dateSeparatedByDashes((*it).getDate()) << endl;
+            cout << "Expense Id : " <<(*it).getExpenseId() << endl;
+            cout << "User Id : " <<(*it).getUserId() << endl;
+            cout << "Item Name : " <<(*it).getItemName() << endl;
+            cout << "Amount : " <<(*it).getAmount() << " PLN" << endl;
+            cout << endl;
+        }
+    }
+    cout << "Sume Of Incomes = " << sumIncomes << " PLN, Sume Of Expenses = " << sumExpenses << " PLN, Total Difference = " << sumIncomes - sumExpenses << " PLN." << endl;
+    system("PAUSE");
+
 }

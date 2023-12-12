@@ -11,10 +11,7 @@ char MyBuget::logInPanel()
     cout << "2 - REGISTER" << endl;
     cout << "3 - EXIT" << endl;
 
-    char choise;
-    choise = getch();
-
-    return choise;
+    return getch();
 }
 
 void MyBuget::logIn()

@@ -16,8 +16,9 @@ public:
     ExpensesXmlFile(string expensesFilename) : EXPENSES_FILE_NAME(expensesFilename){
     lastExpenseId = 0;
     };
-    void addExpenseToFile(Expense expense, string date, string amount);
+    void addExpenseToFile(Expense expense);
     vector <Expense> readExpensesFromFile(int idLoggedUser);
+    int getLastExpenseId();
 
 };
 #endif
