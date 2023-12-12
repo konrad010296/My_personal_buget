@@ -24,16 +24,6 @@ public:
     static int convertionStringToInt(string digit);
     static float convertionStringToFloat(string digit);
 
-    static string getCurrentDate();
-    static string changeDateToBeginningMonth(string word);
-    static string dateSeparatedByDashes(int date);
-    static string getBeginningPerviousMonth(string actualDate);
-    static int connectLastDayWitchCurrentMounth(int date, int day);
-    static int convetionDateToInt(string date);
-    static int calculateDaysInMonth(string date);
-    static bool askAboutDate();
-    static bool checkDateFormat(string date);
-    static bool checkDateRage(string date);
 
 
 };

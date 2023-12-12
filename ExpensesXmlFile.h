@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class ExpensesXmlFile : public XmlFile
+class ExpensesXmlFile : private XmlFile
 {
 
     int lastExpenseId;

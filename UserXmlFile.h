@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class UserXmlFile : public XmlFile
+class UserXmlFile : private XmlFile
 {
     int idOfLastUser;
     vector <User> users;
